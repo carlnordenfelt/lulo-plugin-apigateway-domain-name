@@ -1,6 +1,6 @@
 {
   "name": "lulo-plugin-apigateway-domain-name",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "scripts": {
     "lint": "eslint src tests",
     "test-unit": "NODE_ENV=TEST istanbul cover --include-all-sources true node_modules/.bin/_mocha ./tests/unit -- --recursive",
