@@ -42,6 +42,7 @@ describe('Index unit tests', function () {
         event = {
             ResourceProperties: {
                 domainName: 'domainName',
+                certificateArn: 'certificateArn',
                 certificateChain: 'certificateChain',
                 certificateBody: 'certificateBody',
                 certificatePrivateKey: 'certificatePrivateKey',
@@ -49,6 +50,7 @@ describe('Index unit tests', function () {
             },
             OldResourceProperties: {
                 domainName: 'domainName',
+                certificateArn: 'certificateArn',
                 certificateChain: 'certificateChain',
                 certificateBody: 'certificateBody',
                 certificatePrivateKey: 'certificatePrivateKey',
@@ -64,6 +66,25 @@ describe('Index unit tests', function () {
     describe('validate', function () {
         it('should succeed', function (done) {
             subject.validate(event);
+            expect(event.ResourceProperties.certificateBody).to.equal(undefined);
+            expect(event.ResourceProperties.certificateChain).to.equal(undefined);
+            expect(event.ResourceProperties.certificatePrivateKey).to.equal(undefined);
+            done();
+        });
+        it('should use legacy parameters if certificateArn is not set', function (done) {
+            delete event.ResourceProperties.certificateArn;
+            subject.validate(event);
+            expect(event.ResourceProperties.certificateBody).to.be.a('string');
+            expect(event.ResourceProperties.certificateChain).to.be.a('string');
+            expect(event.ResourceProperties.certificatePrivateKey).to.be.a('string');
+            done();
+        });
+        it('should fail if certificateName is not set', function (done) {
+            delete event.ResourceProperties.certificateName;
+            function fn () {
+                subject.validate(event);
+            }
+            expect(fn).to.throw(/Missing required property certificateName/);
             done();
         });
         it('should fail if domainName is not set', function (done) {
@@ -76,6 +97,7 @@ describe('Index unit tests', function () {
         });
         it('should fail if certificateChain is not set', function (done) {
             delete event.ResourceProperties.certificateChain;
+            delete event.ResourceProperties.certificateArn;
             function fn () {
                 subject.validate(event);
             }
@@ -84,6 +106,7 @@ describe('Index unit tests', function () {
         });
         it('should fail if certificateBody is not set', function (done) {
             delete event.ResourceProperties.certificateBody;
+            delete event.ResourceProperties.certificateArn;
             function fn () {
                 subject.validate(event);
             }
@@ -92,18 +115,11 @@ describe('Index unit tests', function () {
         });
         it('should fail if certificatePrivateKey is not set', function (done) {
             delete event.ResourceProperties.certificatePrivateKey;
+            delete event.ResourceProperties.certificateArn;
             function fn () {
                 subject.validate(event);
             }
             expect(fn).to.throw(/Missing required property certificatePrivateKey/);
-            done();
-        });
-        it('should fail if certificateName is not set', function (done) {
-            delete event.ResourceProperties.certificateName;
-            function fn () {
-                subject.validate(event);
-            }
-            expect(fn).to.throw(/Missing required property certificateName/);
             done();
         });
     });

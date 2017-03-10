@@ -1,6 +1,6 @@
 {
   "name": "lulo-plugin-apigateway-domain-name",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {
     "lint": "eslint src tests",
     "test-unit": "NODE_ENV=TEST istanbul cover --include-all-sources true node_modules/.bin/_mocha ./tests/unit -- --recursive",
@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/carlnordenfelt/lulo-plugin-apigateway-domain-name",
   "dependencies": {
-    "aws-sdk": "2.7.26"
+    "aws-sdk": "2.26.0"
   },
   "devDependencies": {
     "chai": "3.5.0",

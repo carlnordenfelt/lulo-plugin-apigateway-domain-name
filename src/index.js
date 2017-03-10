@@ -9,19 +9,25 @@ pub.validate = function (event) {
     if (!event.ResourceProperties.domainName) {
         throw new Error('Missing required property domainName');
     }
-    if (!event.ResourceProperties.certificateChain) {
-        throw new Error('Missing required property certificateChain');
-    }
-    if (!event.ResourceProperties.certificateBody) {
-        throw new Error('Missing required property certificateBody');
-    }
-    if (!event.ResourceProperties.certificatePrivateKey) {
-        throw new Error('Missing required property certificatePrivateKey');
-    }
     if (!event.ResourceProperties.certificateName) {
         throw new Error('Missing required property certificateName');
     }
-    fixCertificates(event);
+    if (event.ResourceProperties.certificateArn) {
+        delete event.ResourceProperties.certificateChain;
+        delete event.ResourceProperties.certificateBody;
+        delete event.ResourceProperties.certificatePrivateKey;
+    } else {
+        if (!event.ResourceProperties.certificateChain) {
+            throw new Error('Missing required property certificateChain');
+        }
+        if (!event.ResourceProperties.certificateBody) {
+            throw new Error('Missing required property certificateBody');
+        }
+        if (!event.ResourceProperties.certificatePrivateKey) {
+            throw new Error('Missing required property certificatePrivateKey');
+        }
+        fixCertificates(event);
+    }
 };
 
 pub.create = function (event, _context, callback) {

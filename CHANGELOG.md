@@ -1,3 +1,7 @@
+# 2.0.0
+* Added certificateArn parameter
+* Deprecated certificateChain, certificateBody & certificatePrivateKey parameters.
+
 # 1.0.0
 First stable release
 

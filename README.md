@@ -12,12 +12,17 @@ npm install lulo-plugin-api-gateway-domain-name --save
 ## Usage
 ### Properties
 * domainName: The domain name. Required
-* certificateChain: The certificate chain. Required
-* certificateBody: The certificate body. Required
-* certificatePrivateKey: The certificate private key. Required
 * certificateName: The name of the certificate. Required
+* certificateArn: ACM Certificate arn, must be issued in us-east-1. Conditional.  *Since 2.0.0*
 
-**Note:** API Gateway does not allow modifications to the certificate except for `certificateName`. 
+**Note: The following parameters are still supported but have been deprecated.
+Use `certificateArn` instead.**
+
+* certificateChain: The certificate chain. *Deprecated since 2.0.0*
+* certificateBody: The certificate body. *Deprecated since 2.0.0*
+* certificatePrivateKey: The certificate private key. *Deprecated since 2.0.0*
+
+**Note:** API Gateway does not allow modifications to the certificate except for `certificateName`.
 If you need to renew the certificate, please use the API Gateway Console.
 Changes to the other properties will have no effect on the resource.
 
