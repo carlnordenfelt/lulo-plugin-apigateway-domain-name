@@ -28,7 +28,7 @@ Changes to the other properties will have no effect on the resource.
 
 ### Return Values
 #### Fn::GetAtt
-**distributionDomainName** The product `Fn::GetAtt["DomainName", "distributionDomainName"]`. Note: You must create a DNS record matching `domainName` pointing to this distribution.
+**distributionDomainName** The product `{ "Fn::GetAtt": ["DomainName", "distributionDomainName"] }`. Note: You must create a DNS record matching `domainName` pointing to this distribution.
 
 ### Required IAM Permissions
 The Custom Resource Lambda requires the following permissions for this plugin to work:
