@@ -36,7 +36,8 @@ The Custom Resource Lambda requires the following permissions for this plugin to
 {
    "Effect": "Allow",
    "Action": [
-        "apigateway:*"
+        "apigateway:*",
+        "cloudfront:UpdateDistribution"
    ],
    "Resource": "*"
 }
