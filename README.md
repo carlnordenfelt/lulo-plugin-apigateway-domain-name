@@ -1,3 +1,7 @@
+This package has been deprecated, please see
+[AWS::ApiGateway::DomainName](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html)
+
+
 # lulo Amazon API Gateway Domain Name
 
 lulo Amazon API Gateway Domain Name creates a new Domain Name that can be used for API Gateway.
